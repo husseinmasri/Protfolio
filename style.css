@@ -1807,6 +1807,30 @@ a.contact-info-item:hover {
     grid-template-columns: 1fr;
     gap: 2rem;
   }
+  .portfolio-card .card-image-wrapper {
+    aspect-ratio: 16/12;
+  }
+  .portfolio-card .card-overlay-details {
+    transform: translateY(0);
+    padding: 1.8rem;
+    background: linear-gradient(to top, rgba(5, 5, 5, 0.98) 0%, rgba(5, 5, 5, 0.9) 70%, rgba(5, 5, 5, 0.3) 100%);
+  }
+  .portfolio-card .card-project-desc,
+  .portfolio-card .card-action-btn {
+    opacity: 1;
+  }
+  .portfolio-card .card-project-title {
+    font-size: 1.1rem;
+    margin-bottom: 0.2rem;
+  }
+  .portfolio-card .card-project-desc {
+    font-size: 0.8rem;
+    margin-bottom: 0.6rem;
+    max-width: 100%;
+  }
+  .portfolio-card .card-action-btn {
+    font-size: 0.78rem;
+  }
   .skills-grid {
     grid-template-columns: repeat(2, 1fr);
   }
@@ -1849,5 +1873,16 @@ a.contact-info-item:hover {
   .contact-links-grid {
     grid-template-columns: 1fr;
   }
-
+  .portfolio-card .card-image-wrapper {
+    aspect-ratio: 16/14;
+  }
+  .portfolio-card .card-overlay-details {
+    padding: 1.2rem;
+  }
+  .portfolio-card .card-project-title {
+    font-size: 0.95rem;
+  }
+  .portfolio-card .card-project-desc {
+    font-size: 0.72rem;
+  }
 }
