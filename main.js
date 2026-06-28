@@ -27,7 +27,37 @@ const caseStudies = {
       "Interactive campaign materials reaching over 500k industry decision-makers.",
       "AI creative workflows implemented, reducing asset production cycles by 40%."
     ],
-    image: "assets/ai_energy.png"
+    image: "assets/ai_energy.jpg",
+    gallery: [
+      "assets/energy/work_1.jpg",
+      "assets/energy/work_2.jpg",
+      "assets/energy/work_3.jpg",
+      "assets/energy/work_4.jpg",
+      "assets/energy/work_5.jpg",
+      "assets/energy/work_6.jpg",
+      "assets/energy/work_7.jpg",
+      "assets/energy/work_8.jpg",
+      "assets/energy/work_9.jpg",
+      "assets/energy/work_10.jpg",
+      "assets/energy/work_11.jpg",
+      "assets/energy/work_12.jpg",
+      "assets/energy/work_13.jpg",
+      "assets/energy/work_14.jpg",
+      "assets/energy/work_15.jpg",
+      "assets/energy/work_16.jpg",
+      "assets/energy/work_17.jpg",
+      "assets/energy/work_18.jpg",
+      "assets/energy/work_19.jpg",
+      "assets/energy/work_20.jpg",
+      "assets/energy/work_21.jpg",
+      "assets/energy/work_22.jpg",
+      "assets/energy/work_23.jpg",
+      "assets/energy/work_24.jpg",
+      "assets/energy/work_25.jpg",
+      "assets/energy/work_26.jpg",
+      "assets/energy/work_27.jpg",
+      "assets/energy/work_28.jpg"
+    ]
   },
   etihad: {
     title: "Aviation Campaigns",
@@ -44,7 +74,30 @@ const caseStudies = {
       "Maintained 100% brand consistency across regional marketing rollouts and international corridors.",
       "Multimedia creative direction that elevated digital brand perception in luxury traveler segments."
     ],
-    image: "assets/aviation.png"
+    image: "assets/aviation.jpg",
+    gallery: [
+      "assets/aviation/work_1.jpg",
+      "assets/aviation/work_2.jpg",
+      "assets/aviation/work_3.jpg",
+      "assets/aviation/work_4.jpg",
+      "assets/aviation/work_5.jpg",
+      "assets/aviation/work_6.jpg",
+      "assets/aviation/work_7.jpg",
+      "assets/aviation/work_8.jpg",
+      "assets/aviation/work_9.jpg",
+      "assets/aviation/work_10.jpg",
+      "assets/aviation/work_11.jpg",
+      "assets/aviation/work_12.jpg",
+      "assets/aviation/work_13.jpg",
+      "assets/aviation/work_14.jpg",
+      "assets/aviation/work_15.jpg",
+      "assets/aviation/work_16.jpg",
+      "assets/aviation/work_17.jpg",
+      "assets/aviation/work_18.jpg",
+      "assets/aviation/work_19.jpg",
+      "assets/aviation/work_20.jpg",
+      "assets/aviation/work_21.jpg"
+    ]
   },
   corporate: {
     title: "Government & Corporate Communication",
@@ -60,7 +113,17 @@ const caseStudies = {
       "State-level awareness campaigns launched across national print and digital networks.",
       "Created a proprietary template library used by corporate strategy teams for high-value tenders."
     ],
-    image: "assets/corporate.png"
+    image: "assets/corporate.png",
+    gallery: [
+      "assets/government/work_1.jpg",
+      "assets/government/work_2.jpg",
+      "assets/government/work_3.jpg",
+      "assets/government/work_4.jpg",
+      "assets/government/work_5.jpg",
+      "assets/government/work_6.jpg",
+      "assets/government/work_7.jpg",
+      "assets/government/work_8.jpg"
+    ]
   },
   ai_workflow: {
     title: "AI & Future Technology",
@@ -76,7 +139,10 @@ const caseStudies = {
       "Successfully integrated AI assets in marketing test groups.",
       "Authored workflow guides on blending Stable Diffusion, Midjourney, and Adobe Firefly with classic design principles."
     ],
-    image: "assets/ai_tech.png"
+    image: "assets/ai_tech.jpg",
+    gallery: [
+      "assets/ai_tech.jpg"
+    ]
   }
 };
 
@@ -349,15 +415,33 @@ const setupCaseStudyDrawer = () => {
       heroWrapper.style.backgroundColor = "var(--bg-secondary)";
     }
     
-    // Inject Gallery Image
+    // Inject Gallery Images
     const galleryContainer = document.getElementById("drawer-gallery-images");
     galleryContainer.innerHTML = "";
-    if (data.image) {
+    if (data.gallery && data.gallery.length > 0) {
+      data.gallery.forEach(imgSrc => {
+        const item = document.createElement("div");
+        item.className = "drawer-gallery-item";
+        
+        const img = document.createElement("img");
+        img.src = imgSrc;
+        img.alt = data.title;
+        img.className = "drawer-gallery-image";
+        
+        item.appendChild(img);
+        galleryContainer.appendChild(item);
+      });
+    } else if (data.image) {
+      const item = document.createElement("div");
+      item.className = "drawer-gallery-item";
+      
       const img = document.createElement("img");
       img.src = data.image;
       img.alt = data.title;
       img.className = "drawer-gallery-image";
-      galleryContainer.appendChild(img);
+      
+      item.appendChild(img);
+      galleryContainer.appendChild(item);
     }
     
     // Slide Drawer in & Lock Body scroll
@@ -376,13 +460,21 @@ const setupCaseStudyDrawer = () => {
   };
 
   cards.forEach(card => {
-    card.addEventListener("click", () => {
+    card.addEventListener("click", (e) => {
+      e.stopPropagation();
       const projectId = card.getAttribute("data-project-id");
       openDrawer(projectId);
     });
   });
 
   closeBtn.addEventListener("click", closeDrawer);
+  
+  // Close drawer when clicking outside the drawer
+  document.addEventListener("click", (e) => {
+    if (drawer.classList.contains("active") && !drawer.contains(e.target)) {
+      closeDrawer();
+    }
+  });
   
   // Close drawer on escape key
   window.addEventListener("keydown", (e) => {
@@ -463,6 +555,53 @@ const setupScrollAnimations = () => {
 };
 
 
+/* ----------------------------------------------------
+   10. Visual Showcase Lightbox System
+---------------------------------------------------- */
+const setupLightbox = () => {
+  const lightbox = document.getElementById("portfolio-lightbox");
+  const lightboxImg = document.getElementById("lightbox-img");
+  const lightboxClose = document.querySelector(".lightbox-close");
+  
+  if (!lightbox || !lightboxImg || !lightboxClose) return;
+
+  const galleryContainer = document.getElementById("drawer-gallery-images");
+  if (!galleryContainer) return;
+
+  // Use event delegation to detect image clicks
+  galleryContainer.addEventListener("click", (e) => {
+    const item = e.target.closest(".drawer-gallery-item");
+    if (item) {
+      const img = item.querySelector("img");
+      if (img) {
+        lightboxImg.src = img.src;
+        lightbox.style.display = "flex";
+        document.body.style.overflow = "hidden";
+      }
+    }
+  });
+  
+  const closeLightbox = () => {
+    lightbox.style.display = "none";
+    const drawer = document.getElementById("case-study-drawer");
+    if (drawer && drawer.classList.contains("active")) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+  };
+  
+  lightboxClose.addEventListener("click", closeLightbox);
+  lightbox.addEventListener("click", (e) => {
+    if (e.target === lightbox) closeLightbox();
+  });
+  window.addEventListener("keydown", (e) => {
+    if (e.key === "Escape" && lightbox.style.display === "flex") {
+      closeLightbox();
+    }
+  });
+};
+
 // Initialize All Features on Load
 window.addEventListener("load", () => {
   runPreloader();
@@ -473,5 +612,5 @@ window.addEventListener("load", () => {
   setupPortfolioFilters();
   setupCaseStudyDrawer();
   setupScrollAnimations();
-
+  setupLightbox();
 });
