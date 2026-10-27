@@ -62,7 +62,7 @@ const caseStudies = {
   etihad: {
     title: "Aviation Campaigns",
     client: "Etihad Airways, Etihad Cargo, Air Alitalia, Qatar Airways",
-    role: "Creative Lead & Multimedia Specialist",
+    role: "Digital and Multimedia Creative Designer",
     direction: "Global Aviation Motion & Brand Campaigns",
     year: "2014 - 2023",
     overview: "A portfolio of premium digital experiences and high-impact campaigns created for leading global airlines, including Etihad Airways, Etihad Cargo, Air Alitalia, and Qatar Airways. This case study showcases creative rollouts designed to elevate brand presence, drive marketing strategies, and maintain a premium visual identity across international terminals, digital booking systems, and global flight corridors.",
@@ -127,14 +127,15 @@ const caseStudies = {
   },
   ai_workflow: {
     title: "AI & Future Technology",
-    client: "G42, Presight",
-    role: "Multimedia Director / AI Design",
+    client: "G42, Presight, Open Innovation AI",
+    role: "Creative Lead / AI-Powered Design",
     direction: "Neural Generative Pipelines",
     year: "2023 - Present",
     overview: "Exploring the boundary of artificial intelligence and high-end design. By setting up custom local neural pipelines, we generate conceptual sketches, moodboards, and final assets for branding campaigns, showcasing the future of multimedia production.",
     challenge: "Generative AI is often seen as a tool for chaotic, uncontrolled images. Integrating AI into premium corporate branding requires absolute control: style alignment, consistency, and clean compositions. The challenge was building a reliable pipeline that bridges AI speed with human-led strategic art direction.",
     solution: "We created a hybrid creative pipeline: AI tools generate concepts and initial textures, which are then refined, vector-aligned, and finished in Photoshop, Illustrator, and After Effects. This system allows us to test and iterate visual ideas in hours rather than days, maintaining professional standards.",
     results: [
+      "Leads the Sovereign AI campaign and platform visuals for Open Innovation AI, using AI tools to speed up concepting and production.",
       "Concept design process speed increased by over 300%.",
       "Successfully integrated AI assets in marketing test groups.",
       "Authored workflow guides on blending Stable Diffusion, Midjourney, and Adobe Firefly with classic design principles."
